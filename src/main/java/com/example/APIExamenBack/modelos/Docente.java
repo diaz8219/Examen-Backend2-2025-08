@@ -1,29 +1,25 @@
-package com.example.Examen1Back2.modelos;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+package com.example.APIExamenBack.modelos;
+
 import jakarta.persistence.*;
 
-import java.util.List;
-
-@Entit
+@Entity
+@Table(name = "docentes")
 public class Docente {
 
-
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
+    @Column(name = "especialidad", nullable = false, unique = true, length = 20)
     private  String especialidad;
 
-    @OneToMany(mappedBy = "docente")
-    @JsonManagedReference(value = "docente-curso")
-    private List<Curso> cursos;
+    public Docente() {
+    }
 
-    @OneToOne
-    @JoinColumn(name = "fk_usuario", referencedColumnName = "id_usuario")
-    @JsonManagedReference(value = "docente-usuario")
-    private Usuario usuario;
-
-
+    public Docente(Integer id, String especialidad) {
+        this.id = id;
+        this.especialidad = especialidad;
+    }
 
     public Integer getId() {
         return id;
