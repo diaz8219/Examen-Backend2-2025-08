@@ -1,31 +1,30 @@
-package com.example.Examen1Back2.modelos;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+package com.example.APIExamenBack.modelos;
+
+import com.example.APIExamenBack.ayudas.TipoUsuario;
 import jakarta.persistence.*;
 
-@Entit
+@Entity
 @Table(name = "usuarios")
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.)
-    @Colun(name = "id_usuario")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 100)
+    @Column(name ="nombre", nullable = false, unique = true, length = 100)
     private String nombre;
 
-    @Colun(name = "correo_electronico", unique = true)
+    @Column(name = "correo_electronico", nullable = false, unique = true, length = 50)
     private String correoElectronico;
+
+    @Column(name = "contraseña", nullable = false, unique = true, length = 16)
     private String contraseña;
+
+    @Column(name = "telefono", nullable = true, unique = true, length = 10)
     private String telefono;
 
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
-
-    //Estableciendo la relacion uno a uno con la tabla docente
-    @OneToOne(mappedBy = "usuario")
-    @JsonBackReference(value = "docente-usuario")
-    private Docente docente;
 
     public Usuario() {
     }
@@ -39,5 +38,51 @@ public class Usuario {
         this.tipoUsuario = tipoUsuario;
     }
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCorreoElectronico() {
+        return correoElectronico;
+    }
+
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
 }
